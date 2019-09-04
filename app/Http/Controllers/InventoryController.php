@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Inventory;
-use Yajra\Datatables\Facades\Datatables;
+use Yajra\Datatables\Datatables;
 
 class InventoryController extends Controller
 {
