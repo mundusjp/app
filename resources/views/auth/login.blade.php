@@ -10,11 +10,7 @@
                 <div class="card-body">
                   @isset($url)
                       <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
-                      @else
-                      <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
-                      @endisset
                         @csrf
-
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -68,7 +64,25 @@
                                 @endif
                             </div>
                         </div>
-                    </form>
+                      </form>
+                      @else
+                        <div class="row">
+                          <div class="col-6" style="text-align:center;">
+                            <h3>Welcome Admin!</h3>
+                            <p> Please click button below to continue!</p>
+                            <a class="btn btn-success" href="{{url('login/admin')}}"> Login </a>
+                            <a class="btn" href="{{url('register/admin')}}"> Register </a>
+                          </div>
+                          <div class="col-6" style="text-align:center; width:250px;">
+                            <h3>Welcome User!</h3>
+                            <p> Please click button below to continue!</p>
+                            <a class="btn btn-danger" href="{{url('login/user')}}"> Login </a>
+                            <a class="btn" href="{{url('register/user')}}"> Register </a>
+                          </div>
+                        </div>
+                      @endisset
+                        @csrf
+
                 </div>
             </div>
         </div>

@@ -31,4 +31,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('/home', 'home')->middleware('auth');
 Route::view('/admin', 'admin.index');
-Route::view('/writer', 'user.index');
+Route::view('/user', 'user.index');
+
+Route::resource('inventory','InventoryController');
+Route::get('get-inventories','InventoryController@getInventories')->name('get.inventories');
