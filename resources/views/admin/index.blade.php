@@ -37,13 +37,15 @@
                 </div>
               </div>
               <div class="card-body">
-                Admin,Start creating your amazing application!
+                Hi {{Auth::guard('admin')->user()->name}}, please read information below!
+                <br>
+                <strong><span style="color:red;">Important!</span></strong><br>
+                To check the approval notification, please sign in to this account:<br>
+                The admin email is : super.raymundus@gmail.com <br>
+                The password is : 123Raymundus
+
               </div>
               <!-- /.card-body -->
-              <div class="card-footer">
-                Footer
-              </div>
-              <!-- /.card-footer-->
             </div>
             <!-- /.card -->
           </div>
