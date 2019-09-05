@@ -41,9 +41,11 @@ class InventoryController extends Controller
         $inventories = Inventory::select(['id', 'user_id', 'inventory', 'category_id','amount','status_id', 'created_at', 'updated_at']);
         return Datatables::of($inventories)
         ->addColumn('approve',function($inventory){
-          return '<a href="approve-'.$inventory->id.'" class="btn btn-success">Approve</a>';
+          $button = '<a href="javascript:{}" class="btn btn-xs btn-success btn-approve" data-remote="'.$inventory->id.'">Approve</a>';
+          return $button;
         })->addColumn('reject',function($inventory){
-          return '<a href="reject-'.$inventory->id.'" class="btn btn-danger">Reject</a>';
+          $button = '<a href="javascript:{}" class="btn btn-xs btn-danger btn-reject" data-remote="'.$inventory->id.'">Reject</a>';
+          return $button;
         })
         ->make(true);
     }
@@ -52,12 +54,14 @@ class InventoryController extends Controller
     {
         $inventories = Inventory::where('user_id', Auth::guard('user')->user()->id)->select(['id', 'user_id', 'inventory', 'category_id','amount','status_id', 'created_at', 'updated_at']);
         return Datatables::of($inventories)
-        ->addColumn('approve',function($inventory){
-          return '<a href="approve-'.$inventory->id.'" class="btn btn-success">Approve</a>';
-        })->addColumn('reject',function($inventory){
-          return '<a href="reject-'.$inventory->id.'" class="btn btn-danger">Reject</a>';
-        })
-        ->make(true);
+        ->addColumn('update',function($inventory){
+          if($inventory->status_id == 1){
+            return 'Not Approved';
+          }else{
+            $button = '<a href="javascript:{}" class="btn btn-xs btn-success btn-edit" data-remote="'.$inventory->id.'">Edit</a>';
+            return $button;
+          };
+        })->make(true);
     }
     /**
      * Show the form for creating a new resource.
@@ -125,7 +129,17 @@ class InventoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+          'inventory'=>'required|string',
+          'amount'=>'required|integer',
+          'category'=>'required|integer'
+        ]);
+         $inventory = Inventory::find($id);
+         $inventory->update([
+           'inventory'=>$request->inventory,
+           'amount'=>$request->amount,
+           'category'=>$request->category_id
+         ]);
     }
 
     /**

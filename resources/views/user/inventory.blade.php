@@ -61,6 +61,7 @@
                       <th>Category ID</th>
                       <th>Amount</th>
                       <th>Status ID</th>
+                      <th>Edit Data</th>
                     </tr>
                   </thead>
                 </table>
@@ -134,12 +135,13 @@
         serverSide: true,
         ajax: '{!! route('get.userinventories')!!}',
         columns:[
-          {data: 'id', name: 'ID'},
-          {data: 'user_id', name:'User ID'},
-          {data: 'inventory', name:'Inventory'},
-          {data: 'category_id',name:'Category'},
-          {data: 'amount', name:'Amount'},
-          {data: 'status_id', name:'Status'},
+          {data: 'id', name: 'id'},
+          {data: 'user_id', name:'user_id'},
+          {data: 'inventory', name:'inventory'},
+          {data: 'category_id',name:'category_id'},
+          {data: 'amount', name:'amount'},
+          {data: 'status_id', name:'status_id'},
+          {data: 'update', name:'update', orderable: false, searchable: false},
         ]
       });
   } );
