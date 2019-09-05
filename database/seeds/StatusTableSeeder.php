@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Status;
 
 class StatusTableSeeder extends Seeder
 {
@@ -11,6 +12,16 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $stat1 = new Status;
+        $stat1->status = "Waiting for Approval";
+        $stat1->save();
+
+        $stat2 = new Status;
+        $stat2->status = "Approved";
+        $stat2->save();
+
+        $stat3 = new Status;
+        $stat3->status = "Rejected";
+        $stat3->save();
     }
 }
